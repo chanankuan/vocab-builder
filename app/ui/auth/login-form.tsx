@@ -80,6 +80,7 @@ export default function LoginForm() {
               name="password"
               type={isPasswordShown ? 'text' : 'password'}
               placeholder="Password"
+              autoComplete="current-password"
             />
             <button
               type="button"

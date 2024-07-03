@@ -99,6 +99,7 @@ export default function RegisterForm() {
               name="password"
               type={isPasswordShown ? 'text' : 'password'}
               placeholder="Password"
+              autoComplete="off"
             />
             <button
               type="button"
