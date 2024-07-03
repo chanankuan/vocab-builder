@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { clsx } from 'clsx/lite';
 
 import InfoMessage from './info-message';
 import { signin } from '@/app/api';
@@ -51,9 +52,10 @@ export default function LoginForm() {
       <form className="mb-4" onSubmit={handleSubmit(onSubmitHandler)}>
         <div className="mb-[14px] md:mb-[18px]">
           <input
-            className={`block w-full px-[18px] py-4 mb-1 bg-green-light border border-solid border-gray-main outline-none rounded-[15px] placeholder:text-mainFont focus:border-green-dark hover:border-green-dark ${
-              errors.email && 'border-danger'
-            }`}
+            className={clsx(
+              'block w-full px-[18px] py-4 mb-1 bg-green-light border border-solid outline-none rounded-[15px] placeholder:text-mainFont focus:border-green-dark',
+              errors.email ? 'border-danger' : 'border-gray-main'
+            )}
             {...register('email')}
             id="email"
             name="email"
@@ -69,9 +71,10 @@ export default function LoginForm() {
         <div className="mb-8">
           <div className="relative mb-1">
             <input
-              className={`block w-full px-[18px] py-4 bg-green-light border border-solid stroke-2 border-gray-main outline-none rounded-[15px]  placeholder:text-mainFont focus:border-green-dark hover:border-green-dark ${
-                errors.password && 'border-danger'
-              }`}
+              className={clsx(
+                'block w-full px-[18px] py-4 bg-green-light border border-solid stroke-2 outline-none rounded-[15px] placeholder:text-mainFont focus:border-green-dark',
+                errors.password ? 'border-danger' : 'border-gray-main'
+              )}
               {...register('password')}
               id="password"
               name="password"
