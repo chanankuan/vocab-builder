@@ -1,3 +1,10 @@
+export interface User {
+  _id: string;
+  email: string;
+  name: string;
+  token: string;
+}
+
 export interface SignupRequest {
   name: string;
   email: string;
@@ -19,6 +26,4 @@ export interface SignoutResponse {
   message: string;
 }
 
-export interface getMeResponse extends SignupResponse {
-  _id: string;
-}
+export interface getMeResponse extends User {}
