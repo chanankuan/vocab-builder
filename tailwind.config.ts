@@ -33,11 +33,6 @@ const config: Config = {
       },
     },
     fontSize: {
-      // xs: ['12px', '18px'],
-      // sm: ['14px', '14px'],
-      // base: ['16px', '24px'],
-      // lg: ['20px', '20px'],
-      // xl: ['30px', '32px'],
       xs: [
         '12px',
         {
@@ -106,7 +101,7 @@ const config: Config = {
       },
       backgroundImage: {
         'gradient-linear':
-          'linear-gradient(287deg, rgba(133, 170, 159, 0.51) 23.19%, rgba(255, 255, 255, 0.00) 60.01%)',
+          'linear-gradient(311deg, rgba(133, 170, 159, 0.51) 23.19%, rgba(255, 255, 255, 0.00) 60.01%)',
       },
     },
   },
