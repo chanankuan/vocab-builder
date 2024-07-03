@@ -20,7 +20,7 @@ export const RegisterSchema = Yup.object().shape({
 export const LoginSchema = Yup.object().shape({
   email: Yup.string()
     .required('Email is a required field')
-    .email('Invalid email')
-    .matches(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/, 'Invalid email'),
+    .email('Invalid email format')
+    .matches(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/, 'Invalid email format'),
   password: Yup.string().required('Password is a required field'),
 });
