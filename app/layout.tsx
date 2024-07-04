@@ -17,7 +17,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${macpaw.className} relative`}>
+      <body
+        className={`${macpaw.className} relative`}
+        suppressHydrationWarning={true}
+      >
         <Header />
 
         {children}

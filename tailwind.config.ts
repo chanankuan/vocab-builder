@@ -95,6 +95,10 @@ const config: Config = {
       },
     },
     extend: {
+      transitionProperty: {
+        link: 'color, background',
+        spacing: 'margin, padding',
+      },
       rotate: {
         '14': '14deg',
         '24': '24deg',
@@ -102,6 +106,7 @@ const config: Config = {
       backgroundImage: {
         'gradient-linear':
           'linear-gradient(311deg, rgba(133, 170, 159, 0.51) 23.19%, rgba(255, 255, 255, 0.00) 60.01%)',
+        'sidebar-background': "url('/images/auth-bg-desktop.png')",
       },
     },
   },
