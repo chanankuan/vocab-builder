@@ -96,7 +96,7 @@ const config: Config = {
     },
     extend: {
       transitionProperty: {
-        link: 'color, background',
+        link: 'color, background, padding',
         spacing: 'margin, padding',
       },
       rotate: {
