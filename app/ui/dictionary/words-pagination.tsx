@@ -12,7 +12,11 @@ import {
   BiChevronsRight,
 } from 'react-icons/bi';
 
-export default function Pagination({ totalPages }: { totalPages: number }) {
+export default function WordsPagination({
+  totalPages,
+}: {
+  totalPages: number;
+}) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const currentPage = Number(searchParams.get('page')) || 1;

@@ -22,6 +22,9 @@ const config: Config = {
       backdropBackground: '#12141720',
       success: '#3CBF61',
       danger: '#D80027 ',
+      border: {
+        main: '#DBDBDB',
+      },
       gray: {
         main: '#12141710',
         dark: '#12141750',
