@@ -1,3 +1,5 @@
+import { Suspense } from 'react';
+
 import { mockedWords } from '@/public/mockupData';
 import WordsTable from '../ui/dictionary/words-table';
 import WordsPagination from '../ui/dictionary/words-pagination';
@@ -20,7 +22,9 @@ export default async function Dictionary() {
             <WordsTable words={response.results} />
           </div>
           <div className="flex justify-center">
-            <WordsPagination totalPages={10} />
+            <Suspense fallback={<p>Loading...</p>}>
+              <WordsPagination totalPages={10} />
+            </Suspense>
           </div>
         </section>
       </div>
