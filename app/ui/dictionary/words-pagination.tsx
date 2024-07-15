@@ -29,54 +29,53 @@ export default function WordsPagination({
   };
 
   return (
-    <>
-      <div className="inline-flex">
-        <PaginationArrow
-          direction="start"
-          href={createPageURL(1)}
-          isDisabled={currentPage <= 1}
-        />
+    <div className="inline-flex">
+      <PaginationArrow
+        direction="start"
+        href={createPageURL(1)}
+        isDisabled={currentPage <= 1}
+      />
 
-        <PaginationArrow
-          direction="left"
-          href={createPageURL(currentPage - 1)}
-          isDisabled={currentPage <= 1}
-        />
+      <PaginationArrow
+        direction="left"
+        href={createPageURL(currentPage - 1)}
+        isDisabled={currentPage <= 1}
+      />
 
-        <div className="flex gap-[10px]">
-          {allPages.map((page, index) => {
-            let position: 'first' | 'last' | 'single' | 'middle' | undefined;
+      <div className="flex gap-[10px]">
+        {allPages.map((page, index) => {
+          let position: 'first' | 'last' | 'single' | 'middle' | undefined;
 
-            if (index === 0) position = 'first';
-            if (index === allPages.length - 1) position = 'last';
-            if (allPages.length === 1) position = 'single';
-            if (page === '...') position = 'middle';
+          if (index === 0) position = 'first';
+          if (index === allPages.length - 1) position = 'last';
+          if (allPages.length === 1) position = 'single';
+          if (page === '...') position = 'middle';
 
-            return (
-              <PaginationNumber
-                key={page}
-                href={createPageURL(page)}
-                page={page}
-                position={position}
-                isActive={currentPage === page}
-              />
-            );
-          })}
-        </div>
-
-        <PaginationArrow
-          direction="right"
-          href={createPageURL(currentPage + 1)}
-          isDisabled={currentPage >= totalPages}
-        />
-
-        <PaginationArrow
-          direction="end"
-          href={createPageURL(totalPages)}
-          isDisabled={currentPage >= totalPages}
-        />
+          return (
+            <PaginationNumber
+              key={page}
+              href={createPageURL(page)}
+              page={page}
+              position={position}
+              isActive={currentPage === page}
+              index={index}
+            />
+          );
+        })}
       </div>
-    </>
+
+      <PaginationArrow
+        direction="right"
+        href={createPageURL(currentPage + 1)}
+        isDisabled={currentPage >= totalPages}
+      />
+
+      <PaginationArrow
+        direction="end"
+        href={createPageURL(totalPages)}
+        isDisabled={currentPage >= totalPages}
+      />
+    </div>
   );
 }
 
@@ -85,11 +84,13 @@ function PaginationNumber({
   href,
   isActive,
   position,
+  index,
 }: {
   page: number | string;
   href: string;
   position?: 'first' | 'last' | 'middle' | 'single';
   isActive: boolean;
+  index: number;
 }) {
   const className = clsx(
     'flex h-8 w-8 items-center justify-center text-[13px] font-semibold rounded-lg border border-gray-main transition-colors duration-150',
@@ -98,6 +99,7 @@ function PaginationNumber({
       'hover:bg-green-dark hover:border-green-dark hover:text-[#fff]':
         !isActive && position !== 'middle',
       'text-gray-300': position === 'middle',
+      'max-md:hidden': index === 2,
     }
   );
 
