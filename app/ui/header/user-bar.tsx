@@ -3,13 +3,13 @@ import clsx from 'clsx';
 
 import avatar from '@/public/images/default_avatar.svg';
 import avatar_reversed from '@/public/images/default_avatar_reversed.svg';
-import type { User } from '@/app/lib/definitions';
+import type { UserCookie } from '@/app/lib/definitions';
 
 export default function UserBar({
   user,
   isOpen,
 }: {
-  user: User | null;
+  user: UserCookie | null;
   isOpen: boolean;
 }) {
   return (

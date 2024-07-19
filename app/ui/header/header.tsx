@@ -3,7 +3,9 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
+import cookie from 'js-cookie';
 
 import Sidebar from './sidebar';
 import Navbar from './navbar';
@@ -12,11 +14,29 @@ import UserBar from './user-bar';
 
 import logo from '@/public/images/logo.svg';
 import burger from '@/public/images/burger.svg';
-import type { User } from '@/app/lib/definitions';
+
+import type { UserCookie } from '@/app/lib/definitions';
 
 export default function Header() {
-  const [user, setUser] = useState<User | null>(null);
+  const pathname = usePathname();
+  const [user, setUser] = useState<UserCookie | null>(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const isAuthPage =
+    pathname.includes('/login') || pathname.includes('/register');
+
+  useEffect(() => {
+    const cookieData = cookie.get('user');
+
+    if (cookieData) {
+      try {
+        const userData = JSON.parse(decodeURIComponent(cookieData));
+        setUser(userData);
+      } catch (error) {
+        console.error('Error parsing user cookie:', error);
+      }
+    }
+  }, []);
 
   function handleCloseSidebar() {
     setIsSidebarOpen(false);
@@ -41,14 +61,6 @@ export default function Header() {
     };
   }, [setIsSidebarOpen]);
 
-  useEffect(() => {
-    const data = localStorage.getItem('user') || '';
-    if (data) {
-      const user = JSON.parse(data);
-      setUser(user);
-    }
-  }, []);
-
   return (
     <header>
       <div className="container py-4 md:py-5">
@@ -67,34 +79,40 @@ export default function Header() {
             </Link>
           </div>
 
-          <div className="max-lg:hidden">
-            <Navbar />
-          </div>
+          {!isAuthPage && (
+            <>
+              <div className="max-lg:hidden">
+                <Navbar />
+              </div>
+              <div
+                className={clsx(
+                  'flex items-center gap-2 md:gap-4',
+                  isSidebarOpen && 'opacity-0'
+                )}
+              >
+                <UserBar isOpen={isSidebarOpen} user={user} />
 
-          <div
-            className={clsx(
-              'flex items-center gap-2 md:gap-4',
-              isSidebarOpen && 'opacity-0'
-            )}
-          >
-            <UserBar isOpen={isSidebarOpen} user={user} />
-            <div className="max-lg:hidden lg:ml-2">
-              <LogoutButton />
-            </div>
-            <div className="flex items-center md:ml-3 lg:hidden">
-              <button onClick={() => setIsSidebarOpen(true)}>
-                <Image src={burger} alt="burger menu icon" />
-              </button>
-            </div>
-          </div>
+                <div className="max-lg:hidden lg:ml-2">
+                  <LogoutButton />
+                </div>
+                <div className="flex items-center md:ml-3 lg:hidden">
+                  <button onClick={() => setIsSidebarOpen(true)}>
+                    <Image src={burger} alt="burger menu icon" />
+                  </button>
+                </div>
+              </div>
+            </>
+          )}
         </div>
       </div>
 
-      <Sidebar
-        user={user}
-        isOpen={isSidebarOpen}
-        onCloseSidebar={handleCloseSidebar}
-      />
+      {!isAuthPage && (
+        <Sidebar
+          user={user}
+          isOpen={isSidebarOpen}
+          onCloseSidebar={handleCloseSidebar}
+        />
+      )}
     </header>
   );
 }
