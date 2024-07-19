@@ -6,7 +6,7 @@ import close from '@/public/images/close.svg';
 import LogoutButton from './logout-button';
 import Navbar from './navbar';
 import UserBar from './user-bar';
-import type { User } from '@/app/lib/definitions';
+import type { UserCookie } from '@/app/lib/definitions';
 
 const backdropVariants = {
   open: { opacity: 1, display: 'block' },
@@ -23,7 +23,7 @@ export default function Sidebar({
   isOpen,
   onCloseSidebar,
 }: {
-  user: User | null;
+  user: UserCookie | null;
   isOpen: boolean;
   onCloseSidebar: () => void;
 }) {

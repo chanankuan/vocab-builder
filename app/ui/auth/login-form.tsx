@@ -32,10 +32,9 @@ export default function LoginForm() {
 
   async function onSubmitHandler(formData: SigninRequest) {
     try {
-      const data = await signin(formData);
-      localStorage.setItem('user', JSON.stringify(data));
+      await signin(formData);
 
-      router.push('/');
+      router.push('/dictionary');
       setErrorMessage('');
       reset();
     } catch (error) {

@@ -1,7 +1,8 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import cookie from 'js-cookie';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 import chevron_white from '@/public/images/arrow-right-white.svg';
 import chevron_black from '@/public/images/arrow-right-main.svg';
@@ -9,20 +10,13 @@ import chevron_black from '@/public/images/arrow-right-main.svg';
 import { signout } from '@/app/api';
 
 export default function LogoutButton() {
-  const [token, setToken] = useState('');
-
-  useEffect(() => {
-    const data = localStorage.getItem('user') || '';
-    if (data) {
-      const { token } = JSON.parse(data);
-      setToken(token);
-    }
-  }, []);
+  const router = useRouter();
+  const access_token = cookie.get('access_token') || '';
 
   async function handleLogout() {
     try {
-      await signout(token);
-      localStorage.removeItem('user');
+      await signout(access_token);
+      router.push('/login');
     } catch (error) {}
   }
 
