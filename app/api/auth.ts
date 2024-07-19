@@ -1,16 +1,24 @@
+import cookie from 'js-cookie';
+
 import { BACKEND_BASE_URL } from '@/app/lib/constants';
-import {
-  type SigninRequest,
-  type SigninResponse,
-  type SignoutResponse,
-  type SignupRequest,
-  type SignupResponse,
-  type getMeResponse,
+import type {
+  SigninRequest,
+  SigninResponse,
+  SignoutResponse,
+  SignupRequest,
+  SignupResponse,
+  getMeResponse,
 } from '../lib/definitions';
 
-const headers = {
+const headers: HeadersInit = {
   Accept: 'application/json',
   'Content-Type': 'application/json',
+};
+
+const cookieOptions: Cookies.CookieAttributes = {
+  expires: 7,
+  secure: true,
+  sameSite: 'Strict',
 };
 
 export async function signup(userData: SignupRequest) {
@@ -22,6 +30,9 @@ export async function signup(userData: SignupRequest) {
 
   if (response.ok) {
     const data = (await response.json()) as SignupResponse;
+
+    cookie.set('access_token', data.token, cookieOptions);
+
     return data;
   } else {
     if (response.status === 409) {
@@ -49,6 +60,9 @@ export async function signin(userData: SigninRequest) {
 
   if (response.ok) {
     const data = (await response.json()) as SigninResponse;
+
+    cookie.set('access_token', data.token, cookieOptions);
+
     return data;
   } else {
     const data = (await response.json()) as Error;
@@ -77,8 +91,12 @@ export async function signout(token: string) {
     method: 'POST',
   });
 
+  cookie.remove('access_token');
+  cookie.remove('user');
+
   if (response.ok) {
     const data = (await response.json()) as SignoutResponse;
+
     return data;
   } else {
     const data = (await response.json()) as Error;
