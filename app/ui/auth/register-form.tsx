@@ -33,9 +33,8 @@ export default function RegisterForm() {
   async function onSubmitHandler(formData: SignupRequest) {
     try {
       const data = await signup(formData);
-      localStorage.setItem('user', JSON.stringify(data));
 
-      router.push('/');
+      router.push('/dictionary');
       setErrorMessage('');
       reset();
     } catch (error) {
