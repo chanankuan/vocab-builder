@@ -5,6 +5,8 @@ export interface User {
   token: string;
 }
 
+export interface UserCookie extends Pick<User, 'name' | 'email'> {}
+
 export interface SignupRequest {
   name: string;
   email: string;
