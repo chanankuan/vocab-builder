@@ -14,6 +14,7 @@
     "clsx": "^2.1.1",
     "formik": "^2.4.6",
     "framer-motion": "^11.2.12",
+    "js-cookie": "^3.0.5",
     "next": "14.2.4",
     "react": "^18",
     "react-dom": "^18",
@@ -22,6 +23,7 @@
     "yup": "^1.4.0"
   },
   "devDependencies": {
+    "@types/js-cookie": "^3.0.6",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
