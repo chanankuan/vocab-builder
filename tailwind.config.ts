@@ -19,13 +19,14 @@ const config: Config = {
       secondaryFont: '#FCFCFC',
       mainBackground: '#F9F9F9 ',
       mainBackgroundAccent: '#A5C0B8',
-      backdropBackground: '#12141720',
+      backdropBackground: 'rgba(18, 20, 23, 0.20)',
       success: '#3CBF61',
       danger: '#D80027 ',
       border: {
         main: '#DBDBDB',
       },
       gray: {
+        light: '#D1D5DB',
         main: '#12141710',
         dark: '#12141750',
       },
@@ -36,6 +37,13 @@ const config: Config = {
       },
     },
     fontSize: {
+      '2xs': [
+        '10px',
+        {
+          lineHeight: '12px',
+          fontWeight: '400',
+        },
+      ],
       xs: [
         '12px',
         {
@@ -67,6 +75,14 @@ const config: Config = {
         },
       ],
       xl: [
+        '24px',
+        {
+          lineHeight: '28px',
+          letterSpacing: '-0.48px',
+          fontWeight: '600',
+        },
+      ],
+      '2xl': [
         '30px',
         {
           lineHeight: '32px',
@@ -74,7 +90,7 @@ const config: Config = {
           fontWeight: '600',
         },
       ],
-      '2xl': [
+      '3xl': [
         '40px',
         {
           lineHeight: '48px',
@@ -110,6 +126,9 @@ const config: Config = {
         'gradient-linear':
           'linear-gradient(311deg, rgba(133, 170, 159, 0.51) 23.19%, rgba(255, 255, 255, 0.00) 60.01%)',
         'sidebar-background': "url('/images/auth-bg-desktop.png')",
+      },
+      boxShadow: {
+        modal: 'box-shadow: 0px 4px 47px 0px rgba(18, 20, 23, 0.08);',
       },
     },
   },
