@@ -117,6 +117,6 @@ export async function getMe(token: string) {
     const data = (await response.json()) as getMeResponse;
     return data;
   } else {
-    throw new Error('Session has expired. Please login again.');
+    return null;
   }
 }

@@ -247,7 +247,6 @@ export default function WordsTable({ words }: { words: Word[] }) {
         >
           <EditWordModal
             currentWord={currentWord}
-            // onCloseActionsModal={handleCloseModal}
             onCloseModal={handleCloseEditModal}
           />
         </ModalLayout>

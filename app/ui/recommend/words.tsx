@@ -16,7 +16,6 @@ export default function Words() {
   const [words, setWords] = useState<Word[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [totalPages, setSetTotalPages] = useState<number | null>(null);
-  const [shouldRender, setShouldRender] = useState(false);
 
   const searchParams = useSearchParams();
 
@@ -52,7 +51,7 @@ export default function Words() {
     }
 
     fetchOwnWords();
-  }, [searchParams, shouldRender]);
+  }, [searchParams]);
 
   return (
     <>

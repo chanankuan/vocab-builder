@@ -1,7 +1,8 @@
 import { Metadata } from 'next';
 
-import Dashboard from '../ui/dashboard/dashboard';
+import { WordsProvider } from '@/context/words-context';
 import Words from '../ui/recommend/words';
+import Dashboard from '../ui/dashboard/dashboard';
 
 export const metadata: Metadata = {
   title: 'Recommend Page',
@@ -9,12 +10,14 @@ export const metadata: Metadata = {
 
 export default function Recommend() {
   return (
-    <main>
-      <div className="container">
-        <Dashboard />
+    <WordsProvider>
+      <main>
+        <div className="container">
+          <Dashboard />
 
-        <Words />
-      </div>
-    </main>
+          <Words />
+        </div>
+      </main>
+    </WordsProvider>
   );
 }
