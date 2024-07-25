@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 
 import { WordsProvider } from '@/context/words-context';
-import Words from '../ui/recommend/words';
+import WordsData from '../ui/recommend/words';
 import Dashboard from '../ui/dashboard/dashboard';
 
 export const metadata: Metadata = {
@@ -12,10 +12,9 @@ export default function Recommend() {
   return (
     <WordsProvider>
       <main>
-        <div className="container">
+        <div className="container py-8 md:py-20">
           <Dashboard />
-
-          <Words />
+          <WordsData />
         </div>
       </main>
     </WordsProvider>

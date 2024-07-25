@@ -14,13 +14,10 @@ export default async function Dictionary() {
   return (
     <WordsProvider>
       <main>
-        <section className="pt-8">
-          <div className="container">
-            <Dashboard />
-
-            <WordsData />
-          </div>
-        </section>
+        <div className="container py-8 md:py-20">
+          <Dashboard />
+          <WordsData />
+        </div>
       </main>
     </WordsProvider>
   );
