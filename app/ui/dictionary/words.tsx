@@ -1,7 +1,7 @@
 'use client';
 
 import { useSearchParams } from 'next/navigation';
-import { Suspense, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import cookie from 'js-cookie';
 
 import { getOwnWords } from '@/app/api/words';
@@ -11,7 +11,6 @@ import { removeEmpty, showToast } from '@/app/lib/utils';
 import WordsTable from '../words-table/words-table';
 import WordsPagination from '../words-table/words-pagination';
 import { PaginationSkeleton, WordsTableSkeleton } from '../skeletons';
-import Loader from '../loader';
 
 export default function WordsData() {
   const { words, setWords, shouldFetch } = useWordsContext();

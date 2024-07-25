@@ -173,7 +173,7 @@ export function FiltersSkeleton() {
 
 export function PaginationSkeleton() {
   return (
-    <div className={'bg-gray-300 h-8 w-[200px] rounded skeleton-pulse'}></div>
+    <div className={'bg-gray-500 h-8 w-[300px] rounded skeleton-pulse'}></div>
   );
 }
 

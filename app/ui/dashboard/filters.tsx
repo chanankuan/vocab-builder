@@ -68,7 +68,7 @@ export default function Filters() {
 
   return (
     <>
-      {/* {isLoading ? (
+      {isLoading ? (
         <FiltersSkeleton />
       ) : (
         <div
@@ -139,7 +139,7 @@ export default function Filters() {
             </div>
           )}
         </div>
-      )} */}
+      )}
     </>
   );
 }

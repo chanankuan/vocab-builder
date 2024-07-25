@@ -154,28 +154,28 @@ export default function WordsTable({ words }: { words: Word[] }) {
       <table className="border-collapse border-hidden">
         <colgroup>
           <col
-            className={clsx('w-[82px] h-[70px]', {
+            className={clsx('w-[82px]', {
               'md:w-[160px] lg:w-[280px]': pathname.includes('/dictionary'),
               'md:w-[180px] lg:w-[372px]': pathname.includes('/recommend'),
             })}
           />
           <col
-            className={clsx('w-[116px] h-[70px]', {
+            className={clsx('w-[116px]', {
               'md:w-[169px] lg:w-[274px]': pathname.includes('/dictionary'),
               'md:w-[180px] lg:w-[364px]': pathname.includes('/recommend'),
             })}
           />
           {pathname.includes('/dictionary') && (
-            <col className="max-md:hidden h-[70px] md:w-[151px] lg:w-[260px]" />
+            <col className="max-md:hidden md:w-[151px] lg:w-[260px]" />
           )}
           <col
-            className={clsx('w-[95px] h-[70px]', {
+            className={clsx('w-[95px]', {
               'md:w-[122px] lg:w-[254px]': pathname.includes('/dictionary'),
               'md:w-[160px] lg:w-[260px]': pathname.includes('/recommend'),
             })}
           />
           <col
-            className={clsx('w-[50px] h-[70px]', {
+            className={clsx('w-[50px]', {
               'md:w-[66px] lg:w-[136px]': pathname.includes('/dictionary'),
               'md:w-[148px] lg:w-[208px]': pathname.includes('/recommend'),
             })}
@@ -209,12 +209,12 @@ export default function WordsTable({ words }: { words: Word[] }) {
         </thead>
         <tbody className="bg-secondaryFont">
           {table.getRowModel().rows.map(row => (
-            <tr key={row.id} className="h-[70px] lg:h-[72px]">
+            <tr key={row.id} className="">
               {row.getVisibleCells().map(cell => (
                 <td
                   key={cell.id}
                   className={clsx(
-                    'text-sm md:text-[18px] lg:text-[20px] font-medium px-[14px] py-4 lg:p-[22px] border border-gray-main',
+                    'text-sm md:text-[18px] lg:text-[20px] font-medium px-[14px] py-4 lg:p-[22px] border border-gray-main break-all',
                     {
                       'max-md:hidden':
                         cell.id.includes('category') &&
