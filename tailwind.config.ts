@@ -21,7 +21,7 @@ const config: Config = {
       mainBackgroundAccent: '#A5C0B8',
       backdropBackground: 'rgba(18, 20, 23, 0.20)',
       success: '#3CBF61',
-      danger: '#D80027 ',
+      danger: '#D80027',
       border: {
         main: '#DBDBDB',
       },
