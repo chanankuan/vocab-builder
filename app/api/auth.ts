@@ -117,11 +117,6 @@ export async function getMe(token: string) {
     const data = (await response.json()) as getMeResponse;
     return data;
   } else {
-    const data = (await response.json()) as Error;
-    if (response.status === 401) {
-      throw new Error(data.message);
-    }
-
-    throw new Error('An unexpected error occurred.');
+    throw new Error('Session has expired. Please login again.');
   }
 }
