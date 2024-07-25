@@ -1,33 +1,27 @@
-import { Suspense } from 'react';
+import { Metadata } from 'next';
 
-import { mockedWords } from '@/public/mockupData';
-import WordsTable from '../ui/dictionary/words-table';
-import WordsPagination from '../ui/dictionary/words-pagination';
-import Filters from '../ui/dictionary/filters';
-import Actions from '../ui/dictionary/actions';
+import Dashboard from '../ui/dashboard/dashboard';
+import WordsData from '../ui/dictionary/words';
+import { WordsProvider } from '@/context/words-context';
+
+export const metadata: Metadata = {
+  title: 'Dictionary Page',
+  description:
+    'VocabBuilder is a vocabulary-building app for Ukrainians learning English. It features tailored word lists, engaging quizzes, and interactive flashcards to enhance vocabulary retention. With usage examples and progress tracking, VocabBuilder offers an effective and enjoyable learning experience for both beginners and advanced learners.',
+};
 
 export default async function Dictionary() {
-  const response = mockedWords;
-
   return (
-    <main>
-      <div className="container">
+    <WordsProvider>
+      <main>
         <section className="pt-8">
-          <Filters />
-          <p className="text-sm text-gray-main font-medium flex items-center gap-2 mb-2">
-            To study: <span className="text-lg text-mainFont">20</span>
-          </p>
-          <Actions />
-          <div className="mb-8 md:mb-7">
-            <WordsTable words={response.results} />
-          </div>
-          <div className="flex justify-center">
-            <Suspense fallback={<p>Loading...</p>}>
-              <WordsPagination totalPages={10} />
-            </Suspense>
+          <div className="container">
+            <Dashboard />
+
+            <WordsData />
           </div>
         </section>
-      </div>
-    </main>
+      </main>
+    </WordsProvider>
   );
 }
