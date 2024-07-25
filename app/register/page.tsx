@@ -34,7 +34,7 @@ export default function Register() {
 
           <div className="lg:max-w-[620px]">
             <div className="max-md:container bg-green-light rounded-t-[25px] pt-8 pb-2 md:pb-4 md:px-16">
-              <h1 className="text-xl font-semibold md:text-2xl mb-4 md:mb-5">
+              <h1 className="text-2xl font-semibold md:text-2xl mb-4 md:mb-5">
                 Register
               </h1>
               <p className="text-base md:text-lg">
