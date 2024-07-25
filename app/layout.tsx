@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { macpaw } from '@/styles/fonts';
 import './globals.css';
 
+import ToastProvider from './ui/providers/toast-provider';
 import Header from './ui/header/header';
 
 export const metadata: Metadata = {
@@ -23,7 +24,7 @@ export default function RootLayout({
       >
         <Header />
 
-        {children}
+        <ToastProvider>{children}</ToastProvider>
       </body>
     </html>
   );
