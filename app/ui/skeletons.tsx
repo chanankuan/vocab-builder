@@ -170,3 +170,17 @@ export function FiltersSkeleton() {
     </div>
   );
 }
+
+export function PaginationSkeleton() {
+  return (
+    <div className={'bg-gray-300 h-8 w-[200px] rounded skeleton-pulse'}></div>
+  );
+}
+
+export function StatsSkeleton() {
+  return (
+    <div
+      className={'bg-gray-300 h-5 w-[88px] rounded skeleton-pulse max:md:mb-5'}
+    ></div>
+  );
+}
