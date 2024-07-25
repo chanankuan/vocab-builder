@@ -1,22 +1,23 @@
 'use client';
 
 import { useSearchParams } from 'next/navigation';
-import { Suspense, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import cookie from 'js-cookie';
 
 import type { Word } from '@/app/lib/definitions';
 import { getAllWords } from '@/app/api/words';
 import { removeEmpty, showToast } from '@/app/lib/utils';
+import { useWordsContext } from '@/context/words-context';
 
 import WordsTable from '@/app/ui/words-table/words-table';
 import WordsPagination from '@/app/ui/words-table/words-pagination';
-import { WordsTableSkeleton } from '../skeletons';
+import { PaginationSkeleton, WordsTableSkeleton } from '../skeletons';
 
 export default function Words() {
   const [words, setWords] = useState<Word[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [totalPages, setSetTotalPages] = useState<number | null>(null);
-
+  const { updateWords } = useWordsContext();
   const searchParams = useSearchParams();
 
   useEffect(() => {
@@ -51,7 +52,7 @@ export default function Words() {
     }
 
     fetchOwnWords();
-  }, [searchParams]);
+  }, [searchParams, updateWords]);
 
   return (
     <>
@@ -63,11 +64,13 @@ export default function Words() {
         )}
       </div>
 
-      <Suspense fallback={<p>Loading...</p>}>
-        <div className="flex justify-center">
-          {totalPages && <WordsPagination totalPages={totalPages} />}
-        </div>
-      </Suspense>
+      <div className="flex justify-center">
+        {totalPages ? (
+          <WordsPagination totalPages={totalPages} />
+        ) : (
+          <PaginationSkeleton />
+        )}
+      </div>
     </>
   );
 }

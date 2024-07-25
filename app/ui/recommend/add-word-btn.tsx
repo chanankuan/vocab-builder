@@ -1,9 +1,26 @@
+import cookie from 'js-cookie';
+
+import { addWord } from '@/app/api';
 import { showToast } from '@/app/lib/utils';
+import { useWordsContext } from '@/context/words-context';
 import { HiMiniArrowLongRight } from 'react-icons/hi2';
 
 export default function AddWordBtn({ wordId }: { wordId: string }) {
+  const { updateWords } = useWordsContext();
+  const access_token = cookie.get('access_token') ?? '';
+
   async function handleAddWord(wordId: string) {
-    showToast('info', <p>wordId: {wordId}</p>);
+    try {
+      await addWord(wordId, access_token);
+      updateWords();
+      showToast('success', <p>The word added successfully.</p>);
+    } catch (error) {
+      if (error instanceof Error) {
+        showToast('error', <p>{error.message}</p>);
+      } else {
+        showToast('error', <p>An unknown error occured. Please try later.</p>);
+      }
+    }
   }
 
   return (
