@@ -1,4 +1,3 @@
-// middleware.ts
 import { NextResponse } from 'next/server';
 
 import { getMe } from './app/api';
@@ -20,11 +19,15 @@ export async function middleware(req: Request) {
 
   const user = await getMe(access_token);
 
-  if (!user) {
-    return NextResponse.redirect(new URL('/login', req.url));
-  }
-
   const res = NextResponse.next();
+
+  if (!user) {
+    // If no user is found, delete cookies and redirect to login
+    const response = NextResponse.redirect(new URL('/login', req.url));
+    response.cookies.set('access_token', '', { maxAge: -1, path: '/' });
+    response.cookies.set('user', '', { maxAge: -1, path: '/' });
+    return response;
+  }
 
   res.cookies.set(
     'user',
