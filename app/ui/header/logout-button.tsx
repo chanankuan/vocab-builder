@@ -1,11 +1,9 @@
 'use client';
 
 import cookie from 'js-cookie';
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
-import chevron_white from '@/public/images/arrow-right-white.svg';
-import chevron_black from '@/public/images/arrow-right-main.svg';
+import { HiOutlineArrowRight } from 'react-icons/hi';
 
 import { signout } from '@/app/api';
 
@@ -21,16 +19,14 @@ export default function LogoutButton() {
   }
 
   return (
-    <button className="flex items-center gap-[6px]" onClick={handleLogout}>
+    <button
+      className="flex items-center gap-[6px] group"
+      onClick={handleLogout}
+    >
       <span className="text-secondaryFont text-sm font-medium lg:text-mainFont lg:text-base">
         Log out
       </span>
-      <Image className="lg:hidden" src={chevron_white} alt="chevron right" />
-      <Image
-        className="max-lg:hidden"
-        src={chevron_black}
-        alt="chevron right"
-      />
+      <HiOutlineArrowRight className="w-4 h-4 stroke-secondaryFont lg:stroke-mainFont transition-transform group-hover:translate-x-1" />
     </button>
   );
 }
