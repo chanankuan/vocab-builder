@@ -47,9 +47,51 @@ export interface GetAllWordsResponse {
   perPage: number;
 }
 
-export interface GetUsersWordsResponse {
+export interface GetWordsResponse {
   results: Word[];
   totalPages: number;
   page: number;
   perPage: number;
 }
+
+export interface createWordRequest
+  extends Pick<Word, 'en' | 'ua' | 'category'> {
+  isIrregular?: boolean | null;
+}
+
+export interface updateWordRequest extends createWordRequest {}
+
+export interface DeleteWordResponse {
+  message: string;
+  id: string;
+}
+
+export interface UaTask extends Pick<Word, '_id' | 'ua'> {
+  task: string;
+}
+
+export interface EngTask extends Pick<Word, '_id' | 'en'> {
+  task: string;
+}
+
+export interface GetTasksResponse {
+  tasks: (UaTask | EngTask)[];
+}
+
+export interface WordsSearchParams {
+  keyword: string;
+  category: string;
+  isIrregular: string;
+  page: string;
+}
+
+export interface Answer extends Pick<Word, '_id' | 'ua' | 'en'> {
+  task: string;
+  isDone: boolean;
+}
+
+export interface AnswerRequest extends Omit<Answer, 'isDone'> {}
+
+export type NonNullableObject<T> = {
+  [K in keyof T]: Exclude<T[K], null | undefined>;
+};
