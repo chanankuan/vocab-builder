@@ -214,7 +214,7 @@ export default function WordsTable({ words }: { words: Word[] }) {
                 <td
                   key={cell.id}
                   className={clsx(
-                    'text-sm md:text-[18px] lg:text-[20px] font-medium px-[14px] py-4 lg:p-[22px] border border-gray-main break-all',
+                    'text-sm md:text-[18px] lg:text-[20px] font-medium px-[14px] py-4 lg:p-[22px] border border-gray-main max-md:break-all',
                     {
                       'max-md:hidden':
                         cell.id.includes('category') &&

@@ -56,6 +56,7 @@ export default function WordsPagination({
               key={page}
               href={createPageURL(page)}
               page={page}
+              totalPages={totalPages}
               position={position}
               isActive={currentPage === page}
               index={index}
@@ -80,12 +81,14 @@ export default function WordsPagination({
 }
 
 function PaginationNumber({
+  totalPages,
   page,
   href,
   isActive,
   position,
   index,
 }: {
+  totalPages: number;
   page: number | string;
   href: string;
   position?: 'first' | 'last' | 'middle' | 'single';
@@ -99,7 +102,7 @@ function PaginationNumber({
       'hover:bg-green-dark hover:border-green-dark hover:text-[#fff]':
         !isActive && position !== 'middle',
       'text-gray-300': position === 'middle',
-      'max-md:hidden': index === 2,
+      'max-md:hidden': index === 2 && totalPages > 4,
     }
   );
 
