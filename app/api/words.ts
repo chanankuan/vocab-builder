@@ -91,10 +91,13 @@ export async function createWord(
   if (response.ok) {
     const data: Word = await response.json();
     return data;
-  } else {
-    console.log(response.statusText);
-    throw new Error('Unable to complete the operation. Please try later.');
   }
+
+  if (response.status === 409) {
+    throw new Error('The word already exists in your list.');
+  }
+
+  throw new Error('Unable to complete the operation. Please try later.');
 }
 
 export async function addWord(word_id: string, access_token: string) {
