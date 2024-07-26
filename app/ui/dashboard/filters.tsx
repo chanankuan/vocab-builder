@@ -50,6 +50,7 @@ export default function Filters() {
     const { name, value } = e.target;
     const params = new URLSearchParams(searchParams);
 
+    params.delete('page');
     if (value) {
       params.set(name, value.trim());
     } else {

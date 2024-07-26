@@ -16,6 +16,7 @@ import InfoMessage from '../auth/info-message';
 
 import en from '@/public/images/eng-lang.svg';
 import ua from '@/public/images/uk-lang.svg';
+import { useWordsContext } from '@/context/words-context';
 
 export default function AddWordModal({
   onCloseModal,
@@ -60,6 +61,7 @@ function AddWordForm({ onCloseModal }: { onCloseModal: () => void }) {
   } = useForm({
     resolver: yupResolver(CreateWordSchema),
   });
+  const { updateWords } = useWordsContext();
 
   const access_token = cookie.get('access_token') ?? '';
 
@@ -93,6 +95,8 @@ function AddWordForm({ onCloseModal }: { onCloseModal: () => void }) {
       await createWord(formData, access_token);
       reset();
       onCloseModal();
+      updateWords();
+      showToast('success', <p>Word successfully added.</p>);
     } catch (error) {
       if (error instanceof Error) {
         showToast('error', <p>{error.message}</p>);
