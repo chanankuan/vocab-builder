@@ -1,25 +1,26 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import cookie from 'js-cookie';
 
 import type { Word } from '@/app/lib/definitions';
-import { getAllWords } from '@/app/api/words';
+import { getAllWords, getOwnWords } from '@/app/api/words';
 import { removeEmpty, showToast } from '@/app/lib/utils';
 import { useWordsContext } from '@/context/words-context';
 
 import WordsTable from '@/app/ui/words-table/words-table';
 import WordsPagination from '@/app/ui/words-table/words-pagination';
-import NoResult from '../no-result';
-import { PaginationSkeleton, WordsTableSkeleton } from '../skeletons';
+import { PaginationSkeleton, WordsTableSkeleton } from './ui/skeletons';
+import NoResult from './ui/no-result';
 
-export default function Words() {
+export default function WordsData() {
   const [words, setWords] = useState<Word[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [totalPages, setSetTotalPages] = useState<number | null>(null);
   const { shouldFetch } = useWordsContext();
   const searchParams = useSearchParams();
+  const pathname = usePathname();
 
   useEffect(() => {
     const access_token = cookie.get('access_token') ?? '';
@@ -35,7 +36,9 @@ export default function Words() {
 
     async function fetchWords() {
       try {
-        const data = await getAllWords(nonEmptySearchParams, access_token);
+        const data = pathname.includes('/dictionary')
+          ? await getOwnWords(nonEmptySearchParams, access_token)
+          : await getAllWords(nonEmptySearchParams, access_token);
         setWords(data.results);
         setSetTotalPages(data.totalPages);
       } catch (error) {
@@ -53,7 +56,7 @@ export default function Words() {
     }
 
     fetchWords();
-  }, [searchParams, shouldFetch]);
+  }, [searchParams, pathname.includes('/dictionary') && shouldFetch]);
 
   return (
     <>

@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 
 import { WordsProvider } from '@/context/words-context';
-import WordsData from '../ui/recommend/words';
+import WordsData from '../words-data';
 import Dashboard from '../ui/dashboard/dashboard';
 
 export const metadata: Metadata = {

@@ -4,19 +4,21 @@ import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import cookie from 'js-cookie';
 
+import type { Word } from '@/app/lib/definitions';
 import { getOwnWords } from '@/app/api/words';
 import { useWordsContext } from '@/context/words-context';
 import { removeEmpty, showToast } from '@/app/lib/utils';
 
 import WordsTable from '../words-table/words-table';
 import WordsPagination from '../words-table/words-pagination';
+import NoResult from '../no-result';
 import { PaginationSkeleton, WordsTableSkeleton } from '../skeletons';
 
 export default function WordsData() {
-  const { words, setWords, shouldFetch } = useWordsContext();
+  const [words, setWords] = useState<Word[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [totalPages, setSetTotalPages] = useState<number | null>(null);
-
+  const { shouldFetch } = useWordsContext();
   const searchParams = useSearchParams();
 
   useEffect(() => {
@@ -58,17 +60,20 @@ export default function WordsData() {
       <div className="mb-8 md:mb-7">
         {isLoading ? (
           <WordsTableSkeleton page="dictionary" />
-        ) : (
+        ) : words.length ? (
           <WordsTable words={words} />
+        ) : (
+          <NoResult />
         )}
       </div>
 
       <div className="flex justify-center">
-        {totalPages ? (
-          <WordsPagination totalPages={totalPages} />
-        ) : (
-          <PaginationSkeleton />
-        )}
+        {totalPages &&
+          (words.length > 0 ? (
+            <WordsPagination totalPages={totalPages} />
+          ) : (
+            <PaginationSkeleton />
+          ))}
       </div>
     </>
   );
