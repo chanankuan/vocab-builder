@@ -15,10 +15,10 @@ import {
 
 import { deleteWord } from '@/app/api/words';
 import { showToast } from '@/app/lib/utils';
-import { useWordsContext } from '@/context/words-context';
+import { useWordsContext } from '@/hooks';
 import type { Word } from '@/app/lib/definitions';
 
-import ProgressBar from '../dictionary/progress-bar';
+import ProgressBar from '../progress-bar';
 import ActionsBtn from '../dictionary/actions-btn';
 import AddWordBtn from '../recommend/add-word-btn';
 import EditWordModal from '../dictionary/edit-word-modal';
@@ -92,7 +92,11 @@ export default function WordsTable({ words }: { words: Word[] }) {
               <span className="max-md:hidden text-[18px] lg:text-[22px] leading-5 font-medium">
                 {row.original.progress}%
               </span>
-              <ProgressBar progress={row.original.progress} />
+              <ProgressBar
+                progress={row.original.progress}
+                strokeWidth={15}
+                className="w-6 h-6 md:w-[26px] md:h-[26px]"
+              />
             </div>
           ),
       },
@@ -275,6 +279,7 @@ function Modal({
       onCloseActionModal();
       updateWords();
       showToast('success', <p>Word deleted successfully.</p>);
+      // revalidatePath('/training');
     } catch (error) {
       if (error instanceof Error) {
         showToast('error', <p>{error.message}</p>);
