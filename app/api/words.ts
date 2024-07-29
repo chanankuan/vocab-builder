@@ -163,19 +163,22 @@ export async function getWordsTasks(access_token: string) {
 }
 
 export async function postAnswers(
-  answerDto: AnswerRequest,
+  answerDto: AnswerRequest[],
   access_token: string
 ) {
+  console.log('answerDto', answerDto);
   const response = await fetch(`${BACKEND_BASE_URL}/words/answers`, {
     body: JSON.stringify(answerDto),
     method: 'POST',
-    headers: { Authorization: `Bearer ${access_token}` },
+    headers: { ...POSTHeaders, Authorization: `Bearer ${access_token}` },
   });
 
   if (response.ok) {
     const data: Answer[] = await response.json();
     return data;
   } else {
-    throw new Error('Unable to complete the operation. Please try later.');
+    throw new Error(
+      'Unable to complete the operation. Your progress was not saved.'
+    );
   }
 }
