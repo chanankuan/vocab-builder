@@ -2,7 +2,7 @@ import cookie from 'js-cookie';
 
 import { addWord } from '@/app/api';
 import { showToast } from '@/app/lib/utils';
-import { useWordsContext } from '@/context/words-context';
+import { useWordsContext } from '@/hooks';
 import { HiMiniArrowLongRight } from 'react-icons/hi2';
 
 export default function AddWordBtn({ wordId }: { wordId: string }) {

@@ -6,7 +6,7 @@ import cookie from 'js-cookie';
 
 import type { Word } from '@/app/lib/definitions';
 import { getOwnWords } from '@/app/api/words';
-import { useWordsContext } from '@/context/words-context';
+import { useWordsContext } from '@/hooks';
 import { removeEmpty, showToast } from '@/app/lib/utils';
 
 import WordsTable from '../words-table/words-table';

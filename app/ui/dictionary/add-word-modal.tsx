@@ -7,6 +7,7 @@ import cookie from 'js-cookie';
 import Image from 'next/image';
 import clsx from 'clsx';
 
+import { useWordsContext } from '@/hooks';
 import { createWord, getCategories } from '@/app/api/words';
 import { showToast, CreateWordSchema } from '@/app/lib/utils';
 import type { createWordRequest } from '@/app/lib/definitions';
@@ -16,7 +17,6 @@ import InfoMessage from '../auth/info-message';
 
 import en from '@/public/images/eng-lang.svg';
 import ua from '@/public/images/uk-lang.svg';
-import { useWordsContext } from '@/context/words-context';
 
 export default function AddWordModal({
   onCloseModal,
@@ -83,7 +83,7 @@ function AddWordForm({ onCloseModal }: { onCloseModal: () => void }) {
     }
 
     fetchCategories();
-  }, []);
+  }, [access_token]);
 
   async function onSubmitHandler(formData: createWordRequest) {
     // Remove isIrregular property if category is not verb

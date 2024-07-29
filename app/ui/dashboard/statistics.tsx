@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import cookie from 'js-cookie';
 
-import { useWordsContext } from '@/context/words-context';
+import { useWordsContext } from '@/hooks';
 import { getStatistics } from '@/app/api/words';
 import { showToast } from '@/app/lib/utils';
 
@@ -35,7 +35,7 @@ export default function Statistics() {
     }
 
     fetchStats();
-  }, [shouldFetch]);
+  }, [access_token, shouldFetch]);
 
   return (
     <>

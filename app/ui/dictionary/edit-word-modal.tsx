@@ -10,7 +10,7 @@ import clsx from 'clsx';
 import type { updateWordRequest, Word } from '@/app/lib/definitions';
 import { updateWord } from '@/app/api/words';
 import { EditWordSchema, showToast } from '@/app/lib/utils';
-import { useWordsContext } from '@/context/words-context';
+import { useWordsContext } from '@/hooks';
 
 import InfoMessage from '../auth/info-message';
 import { HiXMark } from 'react-icons/hi2';
