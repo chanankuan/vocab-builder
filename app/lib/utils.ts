@@ -2,6 +2,7 @@ import * as Yup from 'yup';
 import { toast, ToastContent, ToastOptions, Id, Bounce } from 'react-toastify';
 
 import { enRegex, uaRegex } from './constants';
+import { EngTask, SavedWord, UaTask } from './definitions';
 
 export const RegisterSchema = Yup.object().shape({
   name: Yup.string()
@@ -167,3 +168,25 @@ export const showToast = (
       return toast(content, optionsToApply);
   }
 };
+
+export function getAnswerObj(currentTask: UaTask | EngTask, userInput: string) {
+  let userAnswer: SavedWord;
+
+  if (currentTask.task === 'en') {
+    userAnswer = {
+      _id: currentTask._id,
+      en: userInput,
+      ua: currentTask.ua,
+      task: currentTask.task,
+    };
+  } else {
+    userAnswer = {
+      _id: currentTask._id,
+      en: currentTask.en,
+      ua: userInput,
+      task: currentTask.task,
+    };
+  }
+
+  return userAnswer;
+}
