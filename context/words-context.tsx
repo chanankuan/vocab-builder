@@ -10,7 +10,7 @@ type WordsContextType = {
   shouldFetch: boolean;
 };
 
-const WordsContext = createContext<WordsContextType | null>(null);
+export const WordsContext = createContext<WordsContextType | null>(null);
 
 export const WordsProvider = ({ children }: { children: ReactNode }) => {
   const [words, setWords] = useState<Word[]>([]);
@@ -27,12 +27,4 @@ export const WordsProvider = ({ children }: { children: ReactNode }) => {
       {children}
     </WordsContext.Provider>
   );
-};
-
-export const useWordsContext = () => {
-  const context = useContext(WordsContext);
-  if (!context) {
-    throw new Error('useWordsContext must be used within a WordsProvider');
-  }
-  return context;
 };
