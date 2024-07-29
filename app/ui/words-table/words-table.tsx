@@ -1,7 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import cookie from 'js-cookie';
@@ -270,6 +270,7 @@ function Modal({
   onCloseActionModal: () => void;
   onOpenEditModal: () => void;
 }) {
+  const router = useRouter();
   const { updateWords } = useWordsContext();
   const access_token = cookie.get('access_token') ?? '';
 
@@ -279,7 +280,7 @@ function Modal({
       onCloseActionModal();
       updateWords();
       showToast('success', <p>Word deleted successfully.</p>);
-      // revalidatePath('/training');
+      router.refresh();
     } catch (error) {
       if (error instanceof Error) {
         showToast('error', <p>{error.message}</p>);

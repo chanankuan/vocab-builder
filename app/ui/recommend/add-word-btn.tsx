@@ -4,8 +4,10 @@ import { addWord } from '@/app/api';
 import { showToast } from '@/app/lib/utils';
 import { useWordsContext } from '@/hooks';
 import { HiMiniArrowLongRight } from 'react-icons/hi2';
+import { useRouter } from 'next/navigation';
 
 export default function AddWordBtn({ wordId }: { wordId: string }) {
+  const router = useRouter();
   const { updateWords } = useWordsContext();
   const access_token = cookie.get('access_token') ?? '';
 
@@ -13,6 +15,7 @@ export default function AddWordBtn({ wordId }: { wordId: string }) {
     try {
       await addWord(wordId, access_token);
       updateWords();
+      router.refresh();
       showToast('success', <p>The word added successfully.</p>);
     } catch (error) {
       if (error instanceof Error) {
