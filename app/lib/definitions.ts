@@ -66,12 +66,12 @@ export interface DeleteWordResponse {
   id: string;
 }
 
-export interface UaTask extends Pick<Word, '_id' | 'ua'> {
-  task: string;
+export interface UaTask extends Pick<Word, '_id' | 'en'> {
+  task: 'ua';
 }
 
-export interface EngTask extends Pick<Word, '_id' | 'en'> {
-  task: string;
+export interface EngTask extends Pick<Word, '_id' | 'ua'> {
+  task: 'en';
 }
 
 export interface GetTasksResponse {
@@ -88,6 +88,10 @@ export interface WordsSearchParams {
 export interface Answer extends Pick<Word, '_id' | 'ua' | 'en'> {
   task: string;
   isDone: boolean;
+}
+
+export interface SavedWord extends Pick<Word, '_id' | 'en' | 'ua'> {
+  task: 'ua' | 'en';
 }
 
 export interface AnswerRequest extends Omit<Answer, 'isDone'> {}
