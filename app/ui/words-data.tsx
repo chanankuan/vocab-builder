@@ -11,8 +11,8 @@ import { useWordsContext } from '@/hooks';
 
 import WordsTable from '@/app/ui/words-table/words-table';
 import WordsPagination from '@/app/ui/words-table/words-pagination';
-import { PaginationSkeleton, WordsTableSkeleton } from './ui/skeletons';
-import NoResult from './ui/no-result';
+import { PaginationSkeleton, WordsTableSkeleton } from './skeletons';
+import NoResult from './no-result';
 
 export default function WordsData() {
   const [words, setWords] = useState<Word[]>([]);
