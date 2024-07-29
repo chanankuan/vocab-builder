@@ -22,7 +22,6 @@ import ProgressBar from '../progress-bar';
 import ActionsBtn from '../dictionary/actions-btn';
 import AddWordBtn from '../recommend/add-word-btn';
 import EditWordModal from '../dictionary/edit-word-modal';
-import ModalLayout from '../layouts/modal-layout';
 
 import { FaRegTrashAlt } from 'react-icons/fa';
 import { HiMiniPencil } from 'react-icons/hi2';
@@ -245,15 +244,11 @@ export default function WordsTable({ words }: { words: Word[] }) {
       )}
 
       {isEditModalShown && currentWord && (
-        <ModalLayout
+        <EditWordModal
+          currentWord={currentWord}
           isOpen={isEditModalShown}
           onCloseModal={handleCloseEditModal}
-        >
-          <EditWordModal
-            currentWord={currentWord}
-            onCloseModal={handleCloseEditModal}
-          />
-        </ModalLayout>
+        />
       )}
     </div>
   );

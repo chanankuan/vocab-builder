@@ -12,6 +12,7 @@ import { updateWord } from '@/app/api/words';
 import { EditWordSchema, showToast } from '@/app/lib/utils';
 import { useWordsContext } from '@/hooks';
 
+import ModalLayout from '../layouts/modal-layout';
 import InfoMessage from '../auth/info-message';
 import { HiXMark } from 'react-icons/hi2';
 import en from '@/public/images/eng-lang.svg';
@@ -19,22 +20,26 @@ import ua from '@/public/images/uk-lang.svg';
 
 export default function EditWordModal({
   currentWord,
+  isOpen,
   onCloseModal,
 }: {
   currentWord: Word;
+  isOpen: boolean;
   onCloseModal: () => void;
 }) {
   return (
-    <div className="relative py-12 px-4 md:py-12 md:px-16">
-      <EditWordForm currentWord={currentWord} onCloseModal={onCloseModal} />
+    <ModalLayout isOpen={isOpen} onCloseModal={onCloseModal}>
+      <div className="relative py-12 px-4 md:py-12 md:px-16">
+        <EditWordForm currentWord={currentWord} onCloseModal={onCloseModal} />
 
-      <button
-        className="absolute top-4 right-4 md:top-5 md:right-5"
-        onClick={onCloseModal}
-      >
-        <HiXMark className="w-6 h-6 fill-secondaryFont md:w-8 md:h-8" />
-      </button>
-    </div>
+        <button
+          className="absolute top-4 right-4 md:top-5 md:right-5"
+          onClick={onCloseModal}
+        >
+          <HiXMark className="w-6 h-6 fill-secondaryFont md:w-8 md:h-8" />
+        </button>
+      </div>
+    </ModalLayout>
   );
 }
 
