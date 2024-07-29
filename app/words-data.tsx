@@ -7,7 +7,7 @@ import cookie from 'js-cookie';
 import type { Word } from '@/app/lib/definitions';
 import { getAllWords, getOwnWords } from '@/app/api/words';
 import { removeEmpty, showToast } from '@/app/lib/utils';
-import { useWordsContext } from '@/context/words-context';
+import { useWordsContext } from '@/hooks';
 
 import WordsTable from '@/app/ui/words-table/words-table';
 import WordsPagination from '@/app/ui/words-table/words-pagination';
@@ -21,6 +21,8 @@ export default function WordsData() {
   const { shouldFetch } = useWordsContext();
   const searchParams = useSearchParams();
   const pathname = usePathname();
+
+  const isDictionaryPath = pathname.includes('/dictionary') && shouldFetch;
 
   useEffect(() => {
     const access_token = cookie.get('access_token') ?? '';
@@ -56,7 +58,7 @@ export default function WordsData() {
     }
 
     fetchWords();
-  }, [searchParams, pathname.includes('/dictionary') && shouldFetch]);
+  }, [searchParams, pathname, isDictionaryPath]);
 
   return (
     <>
