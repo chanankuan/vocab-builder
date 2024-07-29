@@ -73,12 +73,12 @@ export default function WordsData() {
       </div>
 
       <div className="flex justify-center">
-        {totalPages &&
-          (words.length > 0 ? (
-            <WordsPagination totalPages={totalPages} />
-          ) : (
-            <PaginationSkeleton />
-          ))}
+        {words.length ? (
+          totalPages &&
+          totalPages > 1 && <WordsPagination totalPages={totalPages} />
+        ) : (
+          <PaginationSkeleton />
+        )}
       </div>
     </>
   );
