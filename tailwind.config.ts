@@ -29,6 +29,7 @@ const config: Config = {
         light: '#D1D5DB',
         main: '#12141710',
         dark: '#12141750',
+        darker: '#12141780',
       },
       green: {
         light: 'rgba(133, 170, 159, 0.10)',
@@ -126,6 +127,7 @@ const config: Config = {
         'gradient-linear':
           'linear-gradient(311deg, rgba(133, 170, 159, 0.51) 23.19%, rgba(255, 255, 255, 0.00) 60.01%)',
         'sidebar-background': "url('/images/auth-bg-desktop.png')",
+        'book-background': "url('/images/book.png')",
       },
       boxShadow: {
         modal: 'box-shadow: 0px 4px 47px 0px rgba(18, 20, 23, 0.08);',
