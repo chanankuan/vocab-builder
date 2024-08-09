@@ -1,3 +1,6 @@
+'use server';
+
+import { revalidatePath } from 'next/cache';
 import { BACKEND_BASE_URL } from '../lib/constants';
 import type {
   Answer,
@@ -143,6 +146,7 @@ export async function deleteWord(word_id: string, access_token: string) {
 
   if (response.ok) {
     const data: DeleteWordResponse = await response.json();
+    revalidatePath('/training');
     return data;
   } else {
     throw new Error('Unable to complete the operation. Please try later.');

@@ -27,6 +27,7 @@ import { FaRegTrashAlt } from 'react-icons/fa';
 import { HiMiniPencil } from 'react-icons/hi2';
 import en from '@/public/images/eng-lang.svg';
 import ua from '@/public/images/uk-lang.svg';
+// import { revalidate } from '@/app/api/huy';
 
 export default function WordsTable({ words }: { words: Word[] }) {
   const pathname = usePathname();
@@ -275,7 +276,7 @@ function Modal({
       onCloseActionModal();
       updateWords();
       showToast('success', <p>Word deleted successfully.</p>);
-      router.refresh();
+      // revalidate('/training');
     } catch (error) {
       if (error instanceof Error) {
         showToast('error', <p>{error.message}</p>);

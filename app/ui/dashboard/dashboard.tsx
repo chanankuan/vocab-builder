@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { Tooltip } from '@nextui-org/tooltip';
 
 import { HiMiniArrowLongRight } from 'react-icons/hi2';
 
@@ -15,17 +16,19 @@ export default function Dashboard() {
         <div className="flex gap-4 items-center">
           <AddWordBtn />
 
-          <Link
-            href="/training"
-            className="flex gap-2 items-center text-base font-medium transition-[gap] group"
-          >
-            <span>Train oneself</span>
-            <HiMiniArrowLongRight
-              size={20}
-              color="#85AA9F"
-              className="transition-transform group-hover:translate-x-1"
-            />
-          </Link>
+          <Tooltip content="Practice what you've learnt" offset={15}>
+            <Link
+              href="/training"
+              className="flex gap-2 items-center text-base font-medium transition-[gap] group"
+            >
+              <span>Train oneself</span>
+              <HiMiniArrowLongRight
+                size={20}
+                color="#85AA9F"
+                className="transition-transform group-hover:translate-x-1"
+              />
+            </Link>
+          </Tooltip>
         </div>
       </div>
     </div>
