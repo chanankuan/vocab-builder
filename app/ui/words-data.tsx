@@ -64,20 +64,23 @@ export default function WordsData() {
     <>
       <div className="mb-8 md:mb-7">
         {isLoading ? (
-          <WordsTableSkeleton page="recommend" />
+          <>
+            <WordsTableSkeleton page="recommend" />
+            <div className="flex justify-center">
+              <PaginationSkeleton />
+            </div>
+          </>
         ) : words.length ? (
-          <WordsTable words={words} />
+          <>
+            <WordsTable words={words} />
+            {totalPages && totalPages > 1 && (
+              <div className="flex justify-center">
+                <WordsPagination totalPages={totalPages} />
+              </div>
+            )}
+          </>
         ) : (
           <NoResult />
-        )}
-      </div>
-
-      <div className="flex justify-center">
-        {words.length ? (
-          totalPages &&
-          totalPages > 1 && <WordsPagination totalPages={totalPages} />
-        ) : (
-          <PaginationSkeleton />
         )}
       </div>
     </>
