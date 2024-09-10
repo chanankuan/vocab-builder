@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.6.0",
-    "@nextui-org/tooltip": "^2.0.39",
     "@tanstack/react-table": "^8.19.2",
     "clsx": "^2.1.1",
     "formik": "^2.4.6",
