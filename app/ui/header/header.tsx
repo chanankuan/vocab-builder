@@ -36,7 +36,7 @@ export default function Header() {
         console.error('Error parsing user cookie:', error);
       }
     }
-  }, []);
+  }, [pathname]);
 
   function handleCloseSidebar() {
     setIsSidebarOpen(false);
