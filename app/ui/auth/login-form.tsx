@@ -15,10 +15,12 @@ import type { SigninRequest } from '@/app/lib/definitions';
 
 import eyesOff from '@/public/images/eye-off.svg';
 import eyesOn from '@/public/images/eye.svg';
+import Loader from '../loader';
 
 export default function LoginForm() {
   const [isPasswordShown, setIsPasswordShown] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
   const {
@@ -32,11 +34,13 @@ export default function LoginForm() {
 
   async function onSubmitHandler(formData: SigninRequest) {
     try {
+      setIsLoading(true);
       await signin(formData);
 
       router.push('/dictionary');
       setErrorMessage('');
-      reset();
+      // reset();
+      setIsLoading(false);
     } catch (error) {
       if (error instanceof Error) {
         setErrorMessage(error.message);
@@ -102,10 +106,10 @@ export default function LoginForm() {
         {errorMessage && <p className="text-danger">{errorMessage}</p>}
 
         <button
-          className="block w-full py-4 bg-green-dark border border-none rounded-[30px] text-base font-bold text-secondaryFont hover:bg-green-main transition-colors duration-300"
+          className="flex justify-center items-center w-full py-4 bg-green-dark border border-none rounded-[30px] text-base font-bold text-secondaryFont hover:bg-green-main transition-colors duration-300"
           type="submit"
         >
-          Login
+          {isLoading ? <Loader /> : 'Login'}
         </button>
       </form>
 

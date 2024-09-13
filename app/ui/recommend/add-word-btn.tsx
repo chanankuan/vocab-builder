@@ -15,7 +15,6 @@ export default function AddWordBtn({ wordId }: { wordId: string }) {
     try {
       await addWord(wordId, access_token);
       updateWords();
-      router.refresh();
       showToast('success', <p>The word added successfully.</p>);
     } catch (error) {
       if (error instanceof Error) {

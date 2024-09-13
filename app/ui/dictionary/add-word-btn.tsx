@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
-import ModalLayout from '../layouts/modal-layout';
 import AddWordModal from './add-word-modal';
 import { HiMiniPlus } from 'react-icons/hi2';
 
@@ -46,9 +45,10 @@ export default function AddWordBtn() {
             />
           </button>
           {isModalShown && (
-            <ModalLayout isOpen={isModalShown} onCloseModal={handleCloseModal}>
-              <AddWordModal onCloseModal={handleCloseModal} />
-            </ModalLayout>
+            <AddWordModal
+              isOpen={isModalShown}
+              onCloseModal={handleCloseModal}
+            />
           )}
         </>
       )}

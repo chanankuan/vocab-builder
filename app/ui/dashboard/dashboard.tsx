@@ -1,16 +1,15 @@
 import Link from 'next/link';
 
 import { HiMiniArrowLongRight } from 'react-icons/hi2';
-
 import AddWordBtn from '../dictionary/add-word-btn';
 import Filters from './filters';
 import Statistics from './statistics';
 
 export default function Dashboard() {
   return (
-    <div className="lg:flex">
+    <div className="mb-8 md:mb-7 lg:flex">
       <Filters />
-      <div className="mb-8 md:mb-7 lg:mb-0 md:flex md:items-center md:gap-4 lg:ml-auto">
+      <div className="md:flex md:items-center md:gap-4 lg:ml-auto">
         <Statistics />
         <div className="flex gap-4 items-center">
           <AddWordBtn />

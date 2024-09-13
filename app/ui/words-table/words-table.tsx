@@ -22,12 +22,12 @@ import ProgressBar from '../progress-bar';
 import ActionsBtn from '../dictionary/actions-btn';
 import AddWordBtn from '../recommend/add-word-btn';
 import EditWordModal from '../dictionary/edit-word-modal';
-import ModalLayout from '../layouts/modal-layout';
 
 import { FaRegTrashAlt } from 'react-icons/fa';
 import { HiMiniPencil } from 'react-icons/hi2';
 import en from '@/public/images/eng-lang.svg';
 import ua from '@/public/images/uk-lang.svg';
+// import { revalidate } from '@/app/api/huy';
 
 export default function WordsTable({ words }: { words: Word[] }) {
   const pathname = usePathname();
@@ -154,7 +154,7 @@ export default function WordsTable({ words }: { words: Word[] }) {
   }
 
   return (
-    <div className="md:p-[18px] md:rounded-[15px]">
+    <div className="bg-[#fff] md:p-[18px] rounded-lg md:rounded-[15px]">
       <table className="border-collapse border-hidden">
         <colgroup>
           <col
@@ -191,8 +191,9 @@ export default function WordsTable({ words }: { words: Word[] }) {
               {headerGroup.headers.map(header => (
                 <th
                   key={header.id}
+                  id={header.id}
                   className={clsx(
-                    'text-left md:text-[18px] lg:text-[20px] font-medium px-[14px] py-4 lg:px-[22px] lg:py-5 border border-gray-main',
+                    'text-left md:text-[18px] lg:text-[20px] font-medium px-[14px] py-4 lg:px-[22px] lg:py-5 border border-gray-main first-of-type:rounded-tl-lg last-of-type:rounded-tr-lg',
                     {
                       'max-md:hidden':
                         header.id === 'category' &&
@@ -212,9 +213,9 @@ export default function WordsTable({ words }: { words: Word[] }) {
           ))}
         </thead>
         <tbody className="bg-secondaryFont">
-          {table.getRowModel().rows.map(row => (
-            <tr key={row.id} className="">
-              {row.getVisibleCells().map(cell => (
+          {table.getRowModel().rows.map((row, rowIndex) => (
+            <tr key={row.id} className="last-of-type:group">
+              {row.getVisibleCells().map((cell, cellIndex) => (
                 <td
                   key={cell.id}
                   className={clsx(
@@ -224,6 +225,12 @@ export default function WordsTable({ words }: { words: Word[] }) {
                         cell.id.includes('category') &&
                         pathname.includes('/dictionary'),
                       'lg:pr-[144px]': cell.id.includes('progress'),
+                      'rounded-bl-lg':
+                        rowIndex === table.getRowModel().rows.length - 1 &&
+                        cellIndex === 0,
+                      'rounded-br-lg':
+                        rowIndex === table.getRowModel().rows.length - 1 &&
+                        cellIndex === row.getVisibleCells().length - 1,
                     }
                   )}
                 >
@@ -245,15 +252,11 @@ export default function WordsTable({ words }: { words: Word[] }) {
       )}
 
       {isEditModalShown && currentWord && (
-        <ModalLayout
+        <EditWordModal
+          currentWord={currentWord}
           isOpen={isEditModalShown}
           onCloseModal={handleCloseEditModal}
-        >
-          <EditWordModal
-            currentWord={currentWord}
-            onCloseModal={handleCloseEditModal}
-          />
-        </ModalLayout>
+        />
       )}
     </div>
   );
@@ -280,7 +283,7 @@ function Modal({
       onCloseActionModal();
       updateWords();
       showToast('success', <p>Word deleted successfully.</p>);
-      router.refresh();
+      // revalidate('/training');
     } catch (error) {
       if (error instanceof Error) {
         showToast('error', <p>{error.message}</p>);

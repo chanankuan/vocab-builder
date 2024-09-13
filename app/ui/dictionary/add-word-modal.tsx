@@ -13,35 +13,40 @@ import { showToast, CreateWordSchema } from '@/app/lib/utils';
 import type { createWordRequest } from '@/app/lib/definitions';
 import { BiChevronDown } from 'react-icons/bi';
 import { HiXMark } from 'react-icons/hi2';
+import ModalLayout from '../layouts/modal-layout';
 import InfoMessage from '../auth/info-message';
 
 import en from '@/public/images/eng-lang.svg';
 import ua from '@/public/images/uk-lang.svg';
 
 export default function AddWordModal({
+  isOpen,
   onCloseModal,
 }: {
+  isOpen: boolean;
   onCloseModal: () => void;
 }) {
   return (
-    <div className="relative py-12 px-4 md:py-12 md:px-16">
-      <h1 className="text-xl text-secondaryFont mb-4 md:text-3xl md:mb-5">
-        Add word
-      </h1>
-      <p className="text-base text-secondaryFont mb-4 md:text-lg md:mb-8">
-        Adding a new word to the dictionary is an important step in enriching
-        the language base and expanding the vocabulary.
-      </p>
+    <ModalLayout isOpen={isOpen} onCloseModal={onCloseModal}>
+      <div className="relative py-12 px-4 md:py-12 md:px-16">
+        <h1 className="text-xl text-secondaryFont mb-4 md:text-3xl md:mb-5">
+          Add word
+        </h1>
+        <p className="text-base text-secondaryFont mb-4 md:text-lg md:mb-8">
+          Adding a new word to the dictionary is an important step in enriching
+          the language base and expanding the vocabulary.
+        </p>
 
-      <AddWordForm onCloseModal={onCloseModal} />
+        <AddWordForm onCloseModal={onCloseModal} />
 
-      <button
-        className="absolute top-4 right-4 md:top-5 md:right-5"
-        onClick={onCloseModal}
-      >
-        <HiXMark className="w-6 h-6 fill-secondaryFont md:w-8 md:h-8" />
-      </button>
-    </div>
+        <button
+          className="absolute top-4 right-4 md:top-5 md:right-5"
+          onClick={onCloseModal}
+        >
+          <HiXMark className="w-6 h-6 fill-secondaryFont md:w-8 md:h-8" />
+        </button>
+      </div>
+    </ModalLayout>
   );
 }
 

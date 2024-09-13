@@ -15,10 +15,12 @@ import type { SignupRequest } from '@/app/lib/definitions';
 
 import eyesOff from '@/public/images/eye-off.svg';
 import eyesOn from '@/public/images/eye.svg';
+import Loader from '../loader';
 
 export default function RegisterForm() {
   const [isPasswordShown, setIsPasswordShown] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
   const {
@@ -32,11 +34,13 @@ export default function RegisterForm() {
 
   async function onSubmitHandler(formData: SignupRequest) {
     try {
+      setIsLoading(true);
       const data = await signup(formData);
 
       router.push('/dictionary');
       setErrorMessage('');
       reset();
+      setIsLoading(false);
     } catch (error) {
       if (error instanceof Error) {
         setErrorMessage(error.message);
@@ -128,7 +132,7 @@ export default function RegisterForm() {
           className="block w-full py-4 bg-green-dark border border-none rounded-[30px] text-base text-secondaryFont hover:bg-green-main transition-colors duration-300"
           type="submit"
         >
-          Register
+          {isLoading ? <Loader /> : 'Register'}
         </button>
       </form>
 

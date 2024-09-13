@@ -11,8 +11,8 @@ import { useWordsContext } from '@/hooks';
 
 import WordsTable from '@/app/ui/words-table/words-table';
 import WordsPagination from '@/app/ui/words-table/words-pagination';
-import { PaginationSkeleton, WordsTableSkeleton } from './ui/skeletons';
-import NoResult from './ui/no-result';
+import { PaginationSkeleton, WordsTableSkeleton } from './skeletons';
+import NoResult from './no-result';
 
 export default function WordsData() {
   const [words, setWords] = useState<Word[]>([]);
@@ -62,23 +62,26 @@ export default function WordsData() {
 
   return (
     <>
-      <div className="mb-8 md:mb-7">
+      <div className="flex flex-col gap-y-8 md:gap-y-7 mb-8 md:mb-7">
         {isLoading ? (
-          <WordsTableSkeleton page="recommend" />
+          <>
+            <WordsTableSkeleton page="recommend" />
+            <div className="flex justify-center">
+              <PaginationSkeleton />
+            </div>
+          </>
         ) : words.length ? (
-          <WordsTable words={words} />
+          <>
+            <WordsTable words={words} />
+            {totalPages && totalPages > 1 && (
+              <div className="flex justify-center">
+                <WordsPagination totalPages={totalPages} />
+              </div>
+            )}
+          </>
         ) : (
           <NoResult />
         )}
-      </div>
-
-      <div className="flex justify-center">
-        {totalPages &&
-          (words.length > 0 ? (
-            <WordsPagination totalPages={totalPages} />
-          ) : (
-            <PaginationSkeleton />
-          ))}
       </div>
     </>
   );

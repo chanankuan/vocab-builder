@@ -4,6 +4,7 @@ import { ChangeEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import cookie from 'js-cookie';
+import clsx from 'clsx';
 
 import { useProgressContext } from '@/hooks';
 import { postAnswers } from '@/app/api';
@@ -83,7 +84,7 @@ export default function TrainingRoom({
 
   return (
     <div>
-      <div className="mb-[120px] md:mb-[40px] md:p-[18px] lg:flex lg:mb-[80px]">
+      <div className="bg-secondaryFont rounded-lg mb-[120px] md:mb-[40px] md:p-[18px] lg:flex lg:mb-[80px]">
         <div className="flex flex-col p-[22px] h-[195px] max-lg:border-b border-border-main md:h-[280px] lg:h-[300px] lg:flex-1 lg:border-r">
           <div className="md:flex md:justify-between md:items-center">
             <p className="font-medium md:text-lg">
@@ -100,24 +101,18 @@ export default function TrainingRoom({
             <textarea
               value={userInput}
               onChange={handleChange}
-              className="h-full w-full font-medium resize-none outline-none md:text-xl md:font-medium"
+              className="h-full w-full font-medium resize-none bg-transparent outline-none md:text-xl md:font-medium"
             />
           )}
 
-          <div className="flex justify-between mt-auto">
-            {progress < words.length - 1 && (
-              <button
-                type="button"
-                className="flex items-center gap-2 group"
-                onClick={handleSaveWord}
-              >
-                <span className="font-medium">Next</span>
-                <HiMiniArrowLongRight
-                  size={20}
-                  color="#85AA9F"
-                  className="transition-transform group-hover:translate-x-1"
-                />
-              </button>
+          <div
+            className={clsx(
+              'flex justify-be mt-auto',
+              currentTask.task === 'ua' ? 'justify-between' : 'justify-end'
+            )}
+          >
+            {currentTask.task === 'ua' && progress < words.length - 1 && (
+              <NextButton onSaveWord={handleSaveWord} />
             )}
             <div className="flex items-center gap-2 md:hidden">
               <Image src={ua} alt="National flag of Ukraine" priority />
@@ -141,13 +136,23 @@ export default function TrainingRoom({
             <textarea
               value={userInput}
               onChange={handleChange}
-              className="h-full w-full font-medium resize-none outline-none md:text-xl md:font-medium"
+              className="h-full w-full font-medium resize-none bg-transparent outline-none md:text-xl md:font-medium"
             />
           )}
 
-          <div className="flex justify-end items-center gap-2 mt-auto md:hidden">
-            <Image src={en} alt="National flag of GB" priority />
-            <span className="font-medium">English</span>
+          <div
+            className={clsx(
+              'flex justify-be mt-auto',
+              currentTask.task === 'en' ? 'justify-between' : 'justify-end'
+            )}
+          >
+            {currentTask.task === 'en' && progress < words.length - 1 && (
+              <NextButton onSaveWord={handleSaveWord} />
+            )}
+            <div className="flex justify-end items-center gap-2 mt-auto md:hidden">
+              <Image src={en} alt="National flag of GB" priority />
+              <span className="font-medium">English</span>
+            </div>
           </div>
         </div>
       </div>
@@ -157,7 +162,7 @@ export default function TrainingRoom({
           action={handleSubmit}
           className="h-[56px] text-secondaryFont bg-green-dark hover:bg-green-main md:w-[200px]"
         >
-          Add word
+          Save
         </Button>
         <Button
           action={handleCancel}
@@ -178,5 +183,26 @@ export default function TrainingRoom({
         />
       )}
     </div>
+  );
+}
+
+function NextButton({
+  onSaveWord: handleSaveWord,
+}: {
+  onSaveWord: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      className="flex items-center gap-2 group"
+      onClick={handleSaveWord}
+    >
+      <span className="font-medium">Next</span>
+      <HiMiniArrowLongRight
+        size={20}
+        color="#85AA9F"
+        className="transition-transform group-hover:translate-x-1"
+      />
+    </button>
   );
 }

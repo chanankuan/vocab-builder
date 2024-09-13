@@ -5,13 +5,20 @@ import clsx from 'clsx';
 
 export function TableRowSkeleton({
   page,
+  style = '',
 }: {
   page: 'dictionary' | 'recommend';
+  style?: string;
 }) {
   return (
     <tr className="h-[70px] lg:h-[72px]">
       {/* Word */}
-      <td className="px-[14px] py-4 lg:p-[22px] border border-gray-main">
+      <td
+        className={clsx(
+          'px-[14px] py-4 lg:p-[22px] border border-gray-main',
+          style
+        )}
+      >
         <div className="flex justify-between items-center">
           <div className="bg-gray-300 h-4 w-full rounded skeleton-pulse"></div>
         </div>
@@ -35,7 +42,12 @@ export function TableRowSkeleton({
         </td>
       )}
       {/* Actions */}
-      <td className="px-[14px] py-4 lg:p-[22px] border border-gray-main">
+      <td
+        className={clsx(
+          'px-[14px] py-4 lg:p-[22px] border border-gray-main',
+          style
+        )}
+      >
         <div
           className={clsx('flex', {
             'justify-center items-center': page === 'dictionary',
@@ -59,7 +71,7 @@ export function WordsTableSkeleton({
   page: 'dictionary' | 'recommend';
 }) {
   return (
-    <div className="md:p-[18px] md:rounded-[15px]">
+    <div className="bg-[#fff] md:p-[18px] rounded-lg md:rounded-[15px]">
       <table className="border-collapse border-hidden">
         <colgroup>
           <col
@@ -94,7 +106,7 @@ export function WordsTableSkeleton({
           <tr>
             <th
               scope="col"
-              className="font-medium text-left md:text-[18px] lg:text-lg px-[14px] py-4 lg:px-[22px] lg:py-5 border border-gray-main"
+              className="font-medium text-left md:text-[18px] lg:text-lg px-[14px] py-4 lg:px-[22px] lg:py-5 border border-gray-main rounded-tl-lg"
             >
               <div className="flex justify-between items-center">
                 <span className="font-medium">Word</span>
@@ -139,7 +151,7 @@ export function WordsTableSkeleton({
             )}
             <th
               scope="col"
-              className="font-medium text-left md:text-[18px] lg:text-lg px-[14px] py-4 lg:px-[22px] lg:py-5 border border-gray-main"
+              className="font-medium text-left md:text-[18px] lg:text-lg px-[14px] py-4 lg:px-[22px] lg:py-5 border border-gray-main rounded-tr-lg"
             ></th>
           </tr>
         </thead>
@@ -150,7 +162,10 @@ export function WordsTableSkeleton({
           <TableRowSkeleton page={page} />
           <TableRowSkeleton page={page} />
           <TableRowSkeleton page={page} />
-          <TableRowSkeleton page={page} />
+          <TableRowSkeleton
+            page={page}
+            style="first-of-type:rounded-bl-lg last-of-type:rounded-br-lg"
+          />
         </tbody>
       </table>
     </div>
