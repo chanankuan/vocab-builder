@@ -62,7 +62,7 @@ export default function WordsData() {
 
   return (
     <>
-      <div className="mb-8 md:mb-7">
+      <div className="flex flex-col gap-y-8 md:gap-y-7 mb-8 md:mb-7">
         {isLoading ? (
           <>
             <WordsTableSkeleton page="recommend" />
